@@ -1,5 +1,7 @@
 package com.sample.texteditapp.service;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -11,6 +13,9 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 public class ChatgptInteractionService {
+	
+	private static final Logger LOGGER = LogManager.getLogger(ChatgptInteractionService.class);
+
 	
 	@Value("${chatgpt.domain}")
 	private String chatgptDomain;
@@ -30,13 +35,15 @@ public class ChatgptInteractionService {
 		
 		
 		
-		return responseEntity.getBody();
+		return responseEntity != null ? responseEntity.getBody() : null;
 	}
 	
 	
 	private <T> ResponseEntity<T> submitRequest(HttpMethod httpMethod, HttpEntity<String> reqEntity, String reqPath, Class<T> responseType) {
 
 		ResponseEntity<T> response = null;
+		try {
+		
 		RestTemplate restTemp = new RestTemplate();
 		
 		if(HttpMethod.POST.equals(httpMethod)) {
@@ -44,7 +51,9 @@ public class ChatgptInteractionService {
 
 		}
 		
-		
+		} catch(Exception e) {
+			LOGGER.error(e);	
+		}
 		return response;
 		
 	}
