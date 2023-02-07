@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sample.texteditapp.dto.Command;
+import com.sample.texteditapp.dto.Output;
 import com.sample.texteditapp.service.AppService;
 
 @RestController
@@ -22,15 +23,15 @@ public class AppController {
 	
 	
 	@PostMapping("/edits")
-	public String createEdits(@RequestBody Command command) {
+	public Output createEdits(@RequestBody Command command) {
 		LOGGER.info("Parameters: {} ",command);
-		String result =  null;
+		Output output =  null;
 		try {
-			result = appservice.processEdits(command);
+			output = appservice.processEdits(command);
 		
-		return null;
+		return output;
 		} finally {
-			LOGGER.info("return: {} ",result );	
+			LOGGER.info("return: {} ",output );	
 		}
 		
 		

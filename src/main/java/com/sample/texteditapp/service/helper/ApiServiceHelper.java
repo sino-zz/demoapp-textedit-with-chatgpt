@@ -9,6 +9,9 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sample.texteditapp.dto.Command;
+import com.sample.texteditapp.dto.Output;
+import com.sample.texteditapp.dto.chatgpt.ChatGptEditsReq;
+import com.sample.texteditapp.dto.chatgpt.ChatGptEditsResponse;
 
 @Service
 public class ApiServiceHelper {
@@ -40,40 +43,19 @@ public class ApiServiceHelper {
 		
 		return response;
 	}
-	
-	
-	class ChatGptEditsReq {
-		private String model;
+
+	public Output buildOutput(ChatGptEditsResponse response) {
 		
-		private String input ;
+		Output output = new Output();
 		
-		private String instruction;
+		if(response != null && !response.getChoices().isEmpty()) {
+			output.setText(response.getChoices().get(0).getText());
 
-		public String getModel() {
-			return model;
 		}
-
-		public void setModel(String model) {
-			this.model = model;
-		}
-
-		public String getInput() {
-			return input;
-		}
-
-		public void setInput(String input) {
-			this.input = input;
-		}
-
-		public String getInstruction() {
-			return instruction;
-		}
-
-		public void setInstruction(String instruction) {
-			this.instruction = instruction;
-		}
-		
-		
+		return output;
 	}
+	
+	
+	
 
 }
