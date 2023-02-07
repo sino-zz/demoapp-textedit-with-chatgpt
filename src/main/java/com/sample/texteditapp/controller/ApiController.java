@@ -13,10 +13,10 @@ import com.sample.texteditapp.dto.Output;
 import com.sample.texteditapp.service.AppService;
 
 @RestController
-@RequestMapping("/api/vi/texteditapp")
-public class AppController {
+@RequestMapping("/api/v1/texteditapp")
+public class ApiController {
 	
-	private static final Logger LOGGER = LogManager.getLogger(AppController.class);
+	private static final Logger LOGGER = LogManager.getLogger(ApiController.class);
 	
 	@Autowired
 	AppService appservice;

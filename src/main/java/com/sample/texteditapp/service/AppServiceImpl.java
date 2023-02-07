@@ -26,12 +26,13 @@ public class AppServiceImpl implements AppService{
 		
 		String reqBody = apiServiceHelper.buildReq(command);
 		
-		ChatGptEditsResponse response = chatgptInteractionService.submitRequest(reqPath, reqBody, ChatGptEditsResponse.class);
+		//ChatGptEditsResponse response = chatgptInteractionService.submitRequest(reqPath, reqBody, ChatGptEditsResponse.class);
 		
-		Output output =apiServiceHelper.buildOutput(response);
+		//Output output =apiServiceHelper.buildOutput(response);
 		
-		
-		return output;
+		Output out = new Output();
+		out.setText("Hi There, ");
+		return out;
 	}
 
 }
